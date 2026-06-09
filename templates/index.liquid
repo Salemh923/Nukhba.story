@@ -1,0 +1,16 @@
+{% section 'header' %}
+
+<main>
+  {% section 'hero' %}
+  {% section 'trust' %}
+  {% section 'categories' %}
+  {% section 'sell-panel' %}
+  {% section 'wide-ad' %}
+  {% section 'products' %}
+  {% section 'premium-boxes' %}
+</main>
+
+{% section 'footer' %}
+
+{{ 'script.js' | asset_url | script_tag }}
+{{ 'style.css' | asset_url | stylesheet_tag }}
