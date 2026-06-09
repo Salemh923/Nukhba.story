@@ -1,0 +1,77 @@
+:root{
+  --gold:#d8a64b;
+  --gold2:#f3d18a;
+  --green:#2ee59d;
+  --blue:#4db5ff;
+  --red:#ff5d5d;
+  --dark:#030608;
+  --card:#0b1115;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Tajawal,sans-serif;background:var(--dark);color:#fff;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+button,input{font-family:inherit}
+.container{width:min(1500px,94%);margin:auto}
+
+/* أعلى شريط */
+.top-strip{background:linear-gradient(90deg,#201507,#0b0f12,#201507);border-bottom:1px solid #d8a64b33;color:var(--gold2);font-size:14px}
+.top-strip .container{display:flex;justify-content:space-between;gap:15px;padding:9px 0;flex-wrap:wrap}
+.top-strip span{display:flex;align-items:center;gap:6px}
+.strip-icon{width:18px;height:18px;margin-left:6px;vertical-align:middle;filter:drop-shadow(0 0 8px rgba(243,209,138,.45))}
+
+/* الهيدر */
+.luxury-header{position:sticky;top:0;z-index:50;background:#030608;border-bottom:1px solid #ffffff18}
+.header-inner{padding:22px 0 16px}
+.top-brand{display:grid;grid-template-columns:220px 1fr 340px;gap:22px;align-items:center;margin-bottom:16px}
+.logo{font-size:46px;font-weight:900;line-height:1.1}
+.logo span{color:var(--gold)}
+.logo small{display:block;color:var(--gold2);font-size:10px;letter-spacing:7px;margin-right:7px}
+.logo:after{content:"";display:block;width:76px;height:3px;margin-top:7px;border-radius:20px;background:linear-gradient(90deg,var(--gold2),var(--gold))}
+.search-wrap{position:relative}
+.search{width:100%;height:54px;border-radius:999px;background:#0b1115;border:1px solid rgba(243,209,138,.22);color:#fff;padding:0 52px 0 24px;font-size:15px}
+.search-icon{position:absolute;right:20px;top:50%;transform:translateY(-50%);color:var(--gold2)}
+.brand-card{border:1px solid rgba(216,166,75,.28);background:#ffffff0d;border-radius:20px;padding:15px 17px}
+.brand-card b{display:block;color:var(--gold2);font-size:17px;margin-bottom:5px}
+.brand-card p{margin:0;color:#ddd;font-size:13px;line-height:1.6}
+
+/* أيقونات الهيدر */
+.header-actions{display:grid;grid-template-columns:1fr 420px;gap:18px;align-items:center}
+.icons{display:flex;gap:12px}
+.icon-item{width:96px;height:68px;border-radius:18px;background:#ffffff10;border:1px solid rgba(216,166,75,.28);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;transition:.25s}
+.icon-item:hover{transform:translateY(-4px);border-color:var(--gold)}
+.icon-item svg{width:22px;height:22px;margin-bottom:5px;stroke:var(--gold2);stroke-width:1.8;fill:none}
+.icon-item span{font-size:12px;font-weight:700}
+.counter{position:absolute;top:-7px;right:-7px;min-width:22px;height:22px;padding:0 6px;border-radius:50%;background:var(--gold2);color:#111;font-size:12px;font-weight:900;display:none;align-items:center;justify-content:center}
+
+/* أزرار */
+.btn{border:0;cursor:pointer;color:#16100a;font-weight:900;border-radius:12px;padding:14px 24px;background:linear-gradient(135deg,var(--gold2),#ad762d);box-shadow:0 14px 35px #d8a64b33;display:inline-block;text-align:center;transition:.25s}
+.btn:hover{transform:translateY(-3px)}
+.btn.secondary{background:#ffffff12;color:#fff;border:1px solid #ffffff25;box-shadow:none}
+.btn.dark{background:#111820;color:#fff;border:1px solid #d8a64b44;box-shadow:none}
+
+/* القائمة */
+.menu{background:#080d11;border-top:1px solid #ffffff12;border-bottom:1px solid #ffffff12}
+.menu .container{display:flex;gap:34px;align-items:center;flex-wrap:wrap}
+.menu a{padding:15px 0;color:#eee}
+.menu a.active{color:var(--gold2);border-bottom:2px solid var(--gold)}
+
+/* الهيرو */
+.hero{margin-top:18px;margin-bottom:22px;height:600px;border-radius:24px;overflow:hidden;position:relative;border:1px solid #ffffff18;box-shadow:0 35px 100px #000;background:linear-gradient(90deg,#000 0%,#000 30%,#0009 55%,#0002 100%),url("../assets/hero-bg.jpg") center/cover}
+.hero-content{position:absolute;right:70px;top:85px;max-width:650px}
+.tag{color:var(--gold2);font-weight:900;margin-bottom:16px;font-size:18px}
+.hero h1{font-size:68px;line-height:1.08;margin:0;font-weight:900}
+.hero h1 span{color:var(--gold)}
+.hero p{font-size:22px;line-height:1.8;color:#eee}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.hero-stats{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
+.hero-stat{background:#ffffff12;border:1px solid #ffffff22;border-radius:14px;padding:12px 16px}
+.hero-stat b{color:var(--gold2);display:block;font-size:20px}
+
+/* مربعات الثقة */
+.trust-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
+.trust{background:#ffffff12;border:1px solid #ffffff1f;border-radius:14px;padding:10px 12px;min-height:74px;text-align:center;font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.35;font-size:12px}
+.trust b{display:block;color:var(--gold2);font-size:13px;margin-bottom:2px}
+.trust br{display:block}
+.lux-icon{width:18px;height:18px;margin-bottom:4px;filter:drop-shadow(0 0 8px rgba(243,209,138,.25))}
+
+/* باقي الأنماط مثل الفئات، البطاقات، السلة، الفوتر ستتم إضافتها بنفس النسق الكامل في هذا الملف */
