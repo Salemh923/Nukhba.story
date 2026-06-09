@@ -1,0 +1,288 @@
+<section class="products" id="products"></section>
+
+<script>
+const products = [
+  {
+    id:1,
+    name:"iPhone 15 Pro Max",
+    price:3899,
+    oldPrice:4599,
+    category:"electronics",
+    type:"used",
+    condition:"شبه جديد",
+    badge:"مفحوص",
+    rating:4.9,
+    reviews:128,
+    city:"الرياض",
+    warranty:"ضمان 6 أشهر",
+    delivery:"توصيل خلال 24 ساعة",
+    seller:"نُخبة المعتمد",
+    meta:"256GB · تيتانيوم طبيعي · بطارية 96% · Face ID يعمل",
+    check:"تم فحص الشاشة، البطارية، الكاميرا، السماعات، والشحن",
+    image:"https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=900"
+  },
+  {
+    id:2,
+    name:"Samsung Galaxy S24 Ultra",
+    price:4399,
+    oldPrice:4899,
+    category:"electronics",
+    type:"new",
+    condition:"جديد",
+    badge:"ضمان وكيل",
+    rating:4.8,
+    reviews:84,
+    city:"جدة",
+    warranty:"ضمان سنة",
+    delivery:"شحن مجاني",
+    seller:"متجر موثوق",
+    meta:"512GB · تيتانيوم رمادي · قلم S Pen · كرتون جديد",
+    check:"منتج جديد بضمان الوكيل المحلي",
+    image:"https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?q=80&w=900"
+  },
+  {
+    id:3,
+    name:"MacBook Air M2",
+    price:3299,
+    oldPrice:3899,
+    category:"electronics",
+    type:"used",
+    condition:"مستعمل ممتاز",
+    badge:"مضمون",
+    rating:4.7,
+    reviews:61,
+    city:"الدمام",
+    warranty:"ضمان 3 أشهر",
+    delivery:"استلام أو شحن",
+    seller:"بائع موثق",
+    meta:"13 إنش · 8GB RAM · 256GB SSD · نظيف جدًا",
+    check:"تم فحص البطارية، لوحة المفاتيح، الشاشة، المنافذ، والنظام",
+    image:"https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=900"
+  },
+  {
+    id:4,
+    name:"iPad Pro 11 M2",
+    price:2299,
+    oldPrice:2799,
+    category:"electronics",
+    type:"used",
+    condition:"مستعمل",
+    badge:"مفحوص",
+    rating:4.6,
+    reviews:43,
+    city:"الرياض",
+    warranty:"ضمان شهر",
+    delivery:"توصيل سريع",
+    seller:"نُخبة المعتمد",
+    meta:"M2 · 256GB · Wi-Fi · خدوش بسيطة على الحواف",
+    check:"الشاشة سليمة، اللمس ممتاز، البطارية جيدة، بدون مشاكل iCloud",
+    image:"https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?q=80&w=900"
+  },
+  {
+    id:5,
+    name:"Sony WH-1000XM5",
+    price:1299,
+    oldPrice:1599,
+    category:"electronics",
+    type:"new",
+    condition:"جديد",
+    badge:"عرض",
+    rating:4.9,
+    reviews:97,
+    city:"الرياض",
+    warranty:"ضمان الوكيل",
+    delivery:"شحن مجاني",
+    seller:"متجر موثوق",
+    meta:"أسود · إلغاء ضوضاء · بطارية حتى 30 ساعة",
+    check:"منتج جديد مختوم",
+    image:"https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?q=80&w=900"
+  }
+];
+
+let currentFilter = "all";
+
+function renderProducts(){
+  const box = document.getElementById("products");
+  const q = document.querySelector(".search")?.value.toLowerCase() || "";
+
+  const filtered = products.filter(p=>{
+    const matchesSearch = `${p.name} ${p.meta} ${p.condition} ${p.city}`.toLowerCase().includes(q);
+    const matchesFilter =
+      currentFilter === "all" ||
+      p.type === currentFilter ||
+      p.category === currentFilter ||
+      (currentFilter === "offer" && p.oldPrice);
+    return matchesSearch && matchesFilter;
+  });
+
+  box.innerHTML = filtered.map(p=>`
+    <div class="card">
+      <div class="badges">
+        <span class="badge ${p.type === 'used' ? 'used' : 'new'}">${p.condition}</span>
+        <span class="badge checked">${p.badge}</span>
+        ${p.oldPrice ? `<span class="badge sale">خصم</span>` : ""}
+      </div>
+
+      <img src="${p.image}" alt="${p.name}" onclick="openProduct(${p.id})" style="cursor:pointer">
+
+      <h3>${p.name}</h3>
+      <p class="meta">${p.meta}</p>
+
+      <div class="rating">★ ${p.rating} <span style="color:#aaa">(${p.reviews} تقييم)</span></div>
+
+      <div class="product-info">
+        <div class="info-pill"><b>المدينة</b><span>${p.city}</span></div>
+        <div class="info-pill"><b>الضمان</b><span>${p.warranty}</span></div>
+        <div class="info-pill"><b>التوصيل</b><span>${p.delivery}</span></div>
+        <div class="info-pill"><b>البائع</b><span>${p.seller}</span></div>
+      </div>
+
+      <p class="price">
+        ${p.price.toLocaleString()} ريال
+        ${p.oldPrice ? `<span class="old">${p.oldPrice.toLocaleString()} ريال</span>` : ""}
+      </p>
+
+      <div class="actions">
+        <button class="heart" onclick="addToWishlist(${p.id})">♡</button>
+        <button class="compare" onclick="addToCompare(${p.id})">⇄</button>
+        <button class="cart" onclick="addToCart(${p.id})">أضف للسلة</button>
+      </div>
+
+      <button class="details" onclick="openProduct(${p.id})" style="width:100%;margin-top:10px">عرض التفاصيل</button>
+    </div>
+  `).join("");
+
+  if(!filtered.length){
+    box.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px;color:#aaa">لا توجد منتجات مطابقة للبحث الحالي.</div>`;
+  }
+}
+
+function openProduct(id){
+  const p = products.find(x=>x.id===id);
+
+  document.getElementById("modalContent").innerHTML = `
+    <img src="${p.image}" alt="${p.name}">
+    <div>
+      <h2>${p.name}</h2>
+      <p>${p.meta}</p>
+      <div class="rating">★ ${p.rating} من 5 — ${p.reviews} تقييم</div>
+
+      <div class="specs">
+        <div class="spec"><b>الحالة</b>${p.condition}</div>
+        <div class="spec"><b>الفحص</b>${p.badge}</div>
+        <div class="spec"><b>الضمان</b>${p.warranty}</div>
+        <div class="spec"><b>المدينة</b>${p.city}</div>
+        <div class="spec"><b>التوصيل</b>${p.delivery}</div>
+        <div class="spec"><b>البائع</b>${p.seller}</div>
+      </div>
+
+      <p><b style="color:var(--gold2)">نتيجة الفحص:</b><br>${p.check}</p>
+
+      <p class="price">${p.price.toLocaleString()} ريال ${p.oldPrice ? `<span class="old">${p.oldPrice.toLocaleString()} ريال</span>` : ""}</p>
+
+      <div class="hero-actions">
+        <button class="btn" onclick="addToCart(${p.id})">أضف للسلة</button>
+        <button class="btn secondary" onclick="addToWishlist(${p.id})">حفظ في المفضلة</button>
+      </div>
+    </div>
+  `;
+
+  document.getElementById("productModal").classList.add("show");
+}
+
+function closeModal(){
+  document.getElementById("productModal").classList.remove("show");
+}
+
+function addToCart(id){
+  const p = products.find(x=>x.id===id);
+  let cart = JSON.parse(localStorage.getItem("nukhba_cart")) || [];
+  let found = cart.find(item=>item.id===id);
+
+  if(found){
+    found.qty += 1;
+  }else{
+    cart.push({id:p.id,name:p.name,price:p.price,image:p.image,qty:1});
+  }
+
+  localStorage.setItem("nukhba_cart",JSON.stringify(cart));
+  updateCounters();
+  showToast("تمت إضافة المنتج إلى السلة");
+}
+
+function addToWishlist(id){
+  let wish = JSON.parse(localStorage.getItem("nukhba_wishlist")) || [];
+
+  if(!wish.includes(id)){
+    wish.push(id);
+  }
+
+  localStorage.setItem("nukhba_wishlist",JSON.stringify(wish));
+  updateCounters();
+  showToast("تم حفظ المنتج في المفضلة");
+}
+
+function addToCompare(id){
+  let compare = JSON.parse(localStorage.getItem("nukhba_compare")) || [];
+
+  if(!compare.includes(id)){
+    compare.push(id);
+  }
+
+  if(compare.length > 4){
+    compare.shift();
+  }
+
+  localStorage.setItem("nukhba_compare",JSON.stringify(compare));
+  updateCounters();
+  showToast("تمت إضافة المنتج للمقارنة");
+}
+
+function updateCounters(){
+  const cart = JSON.parse(localStorage.getItem("nukhba_cart")) || [];
+  const wish = JSON.parse(localStorage.getItem("nukhba_wishlist")) || [];
+  const compare = JSON.parse(localStorage.getItem("nukhba_compare")) || [];
+
+  setCounter("cartCount", cart.reduce((s,i)=>s+i.qty,0));
+  setCounter("wishCount", wish.length);
+  setCounter("compareCount", compare.length);
+}
+
+function setCounter(id,total){
+  const el = document.getElementById(id);
+  if(!el) return;
+
+  el.innerText = total;
+  el.style.display = total > 0 ? "flex" : "none";
+}
+
+function showToast(message){
+  let old = document.querySelector(".toast");
+  if(old) old.remove();
+
+  let toast = document.createElement("div");
+  toast.className = "toast";
+  toast.innerText = message;
+  document.body.appendChild(toast);
+
+  setTimeout(()=>toast.remove(),1600);
+}
+
+document.querySelector(".search").addEventListener("input",renderProducts);
+
+document.querySelectorAll(".filter-btn").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll(".filter-btn").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    currentFilter = btn.dataset.filter;
+    renderProducts();
+  });
+});
+
+document.getElementById("productModal").addEventListener("click",e=>{
+  if(e.target.id === "productModal") closeModal();
+});
+
+renderProducts();
+updateCounters();
+</script>
